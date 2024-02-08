@@ -12,67 +12,67 @@ import { createFileRoute } from '@tanstack/react-router'
 
 // Import Routes
 
-import { Route as rootRoute } from './routes/__root'
-import { Route as BlogImport } from './routes/blog'
-import { Route as LayoutImport } from './routes/_layout'
-import { Route as R404Import } from './routes/__404'
+import { Route as rootRoute } from "./routes/__root";
+import { Route as BlogImport } from "./routes/blog";
+import { Route as LayoutImport } from "./routes/_layout";
+import { Route as R404Import } from "./routes/__404";
 
 // Create Virtual Routes
 
-const AboutLazyImport = createFileRoute('/about')()
-const IndexLazyImport = createFileRoute('/')()
+const AboutLazyImport = createFileRoute("/about")();
+const IndexLazyImport = createFileRoute("/")();
 
 // Create/Update Routes
 
 const AboutLazyRoute = AboutLazyImport.update({
-  path: '/about',
+  path: "/about",
   getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/about.lazy').then((d) => d.Route))
+} as any).lazy(() => import("./routes/about.lazy").then((d) => d.Route));
 
 const BlogRoute = BlogImport.update({
-  path: '/blog',
+  path: "/blog",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const LayoutRoute = LayoutImport.update({
-  id: '/_layout',
+  id: "/_layout",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const R404Route = R404Import.update({
-  id: '/__404',
+  id: "/__404",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const IndexLazyRoute = IndexLazyImport.update({
-  path: '/',
+  path: "/",
   getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
+} as any).lazy(() => import("./routes/index.lazy").then((d) => d.Route));
 
 // Populate the FileRoutesByPath interface
 
-declare module '@tanstack/react-router' {
+declare module "@tanstack/react-router" {
   interface FileRoutesByPath {
-    '/': {
-      preLoaderRoute: typeof IndexLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/__404': {
-      preLoaderRoute: typeof R404Import
-      parentRoute: typeof rootRoute
-    }
-    '/_layout': {
-      preLoaderRoute: typeof LayoutImport
-      parentRoute: typeof rootRoute
-    }
-    '/blog': {
-      preLoaderRoute: typeof BlogImport
-      parentRoute: typeof rootRoute
-    }
-    '/about': {
-      preLoaderRoute: typeof AboutLazyImport
-      parentRoute: typeof rootRoute
-    }
+    "/": {
+      preLoaderRoute: typeof IndexLazyImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/__404": {
+      preLoaderRoute: typeof R404Import;
+      parentRoute: typeof rootRoute;
+    };
+    "/_layout": {
+      preLoaderRoute: typeof LayoutImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/blog": {
+      preLoaderRoute: typeof BlogImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/about": {
+      preLoaderRoute: typeof AboutLazyImport;
+      parentRoute: typeof rootRoute;
+    };
   }
 }
 
@@ -84,4 +84,4 @@ export const routeTree = rootRoute.addChildren([
   LayoutRoute,
   BlogRoute,
   AboutLazyRoute,
-])
+]);
