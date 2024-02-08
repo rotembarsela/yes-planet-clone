@@ -1,4 +1,4 @@
-name: CI
+name: 🛠️ CI/CD Pipeline
 
 on:
   push:
@@ -13,29 +13,29 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: 📥 Checkout code
         uses: actions/checkout@v4
 
-      - name: Use Node.js
+      - name: 🚀 Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "20"
 
-      - name: Install dependencies
+      - name: ⚙️ Install dependencies
         run: |
           cd client
           npm install
           cd ../server
           npm install
 
-      - name: Run Prettier check on client
+      - name: 🖌️ Run Prettier check on client
         run: cd client && npx prettier --check .
 
-      - name: Run ESLint with Prettier on client
+      - name: 🚥 Run ESLint with Prettier on client
         run: cd client && npx eslint . --ext .js,.jsx,.ts,.tsx
 
-      - name: Run Prettier check on server
+      - name: 🖌️ Run Prettier check on server
         run: cd server && npx prettier --check .
 
-      - name: Run ESLint with Prettier on server
+      - name: 🚥 Run ESLint with Prettier on server
         run: cd server && npx eslint . --ext .js,.jsx,.ts,.tsx
