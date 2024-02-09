@@ -3,6 +3,7 @@ import PlanetIcon from "../assets/planet-logo.svg";
 import { Link } from "@tanstack/react-router";
 import { MapPin, Search, UserRound } from "lucide-react";
 import { useState } from "react";
+import { LanguageSelect } from "./LanguageSelect";
 
 export const Header = () => {
   const [search, setSearch] = useState("");
@@ -40,7 +41,7 @@ export const Header = () => {
                 <Search className="cursor-pointer" />
               </div>
             </form>
-            <div>EN</div>
+            <LanguageSelect />
           </div>
         </div>
       </div>
