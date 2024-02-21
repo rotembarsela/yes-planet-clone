@@ -13,9 +13,16 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from "./routes/__root";
+import { Route as WhatsonImport } from "./routes/whatson";
+import { Route as VipImport } from "./routes/vip";
+import { Route as ScreenxImport } from "./routes/screenx";
+import { Route as OffersImport } from "./routes/offers";
+import { Route as ImaxImport } from "./routes/imax";
+import { Route as GiftsAndMovieCardsImport } from "./routes/giftsAndMovieCards";
 import { Route as BlogImport } from "./routes/blog";
 import { Route as LayoutImport } from "./routes/_layout";
 import { Route as R404Import } from "./routes/__404";
+import { Route as R4dxImport } from "./routes/4dx";
 
 // Create Virtual Routes
 
@@ -28,6 +35,36 @@ const AboutLazyRoute = AboutLazyImport.update({
   path: "/about",
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import("./routes/about.lazy").then((d) => d.Route));
+
+const WhatsonRoute = WhatsonImport.update({
+  path: "/whatson",
+  getParentRoute: () => rootRoute,
+} as any);
+
+const VipRoute = VipImport.update({
+  path: "/vip",
+  getParentRoute: () => rootRoute,
+} as any);
+
+const ScreenxRoute = ScreenxImport.update({
+  path: "/screenx",
+  getParentRoute: () => rootRoute,
+} as any);
+
+const OffersRoute = OffersImport.update({
+  path: "/offers",
+  getParentRoute: () => rootRoute,
+} as any);
+
+const ImaxRoute = ImaxImport.update({
+  path: "/imax",
+  getParentRoute: () => rootRoute,
+} as any);
+
+const GiftsAndMovieCardsRoute = GiftsAndMovieCardsImport.update({
+  path: "/giftsAndMovieCards",
+  getParentRoute: () => rootRoute,
+} as any);
 
 const BlogRoute = BlogImport.update({
   path: "/blog",
@@ -44,6 +81,11 @@ const R404Route = R404Import.update({
   getParentRoute: () => rootRoute,
 } as any);
 
+const R4dxRoute = R4dxImport.update({
+  path: "/4dx",
+  getParentRoute: () => rootRoute,
+} as any);
+
 const IndexLazyRoute = IndexLazyImport.update({
   path: "/",
   getParentRoute: () => rootRoute,
@@ -55,6 +97,10 @@ declare module "@tanstack/react-router" {
   interface FileRoutesByPath {
     "/": {
       preLoaderRoute: typeof IndexLazyImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/4dx": {
+      preLoaderRoute: typeof R4dxImport;
       parentRoute: typeof rootRoute;
     };
     "/__404": {
@@ -69,6 +115,30 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof BlogImport;
       parentRoute: typeof rootRoute;
     };
+    "/giftsAndMovieCards": {
+      preLoaderRoute: typeof GiftsAndMovieCardsImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/imax": {
+      preLoaderRoute: typeof ImaxImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/offers": {
+      preLoaderRoute: typeof OffersImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/screenx": {
+      preLoaderRoute: typeof ScreenxImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/vip": {
+      preLoaderRoute: typeof VipImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/whatson": {
+      preLoaderRoute: typeof WhatsonImport;
+      parentRoute: typeof rootRoute;
+    };
     "/about": {
       preLoaderRoute: typeof AboutLazyImport;
       parentRoute: typeof rootRoute;
@@ -80,8 +150,15 @@ declare module "@tanstack/react-router" {
 
 export const routeTree = rootRoute.addChildren([
   IndexLazyRoute,
+  R4dxRoute,
   R404Route,
   LayoutRoute,
   BlogRoute,
+  GiftsAndMovieCardsRoute,
+  ImaxRoute,
+  OffersRoute,
+  ScreenxRoute,
+  VipRoute,
+  WhatsonRoute,
   AboutLazyRoute,
 ]);

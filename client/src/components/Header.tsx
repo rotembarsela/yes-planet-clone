@@ -1,5 +1,5 @@
 import { Navbar } from "./Navbar";
-import PlanetIcon from "../assets/planet-logo.svg";
+import PlanetIcon from "../assets/planet-logo.svg?react";
 import { Link } from "@tanstack/react-router";
 import { MapPin, Search, UserRound } from "lucide-react";
 import { useState } from "react";
@@ -8,13 +8,17 @@ import { LanguageSelect } from "./LanguageSelect";
 export const Header = () => {
   const [search, setSearch] = useState("");
 
+  // w-[980px] for content center
   return (
     <header className="h-[135px]">
-      <div className="h-[85px] flex gap-5 bg-black text-white">
+      <div className="h-[85px] flex gap-5">
         <div className="w-[980px] mx-auto flex items-center justify-between">
-          <Link to="/" className="block h-full">
-            {/* TODO: replace img tag with the actual svg to avoid img logo fetch on page load */}
-            <img src={PlanetIcon} alt="planet" className="h-full" />
+          <Link
+            to="/"
+            aria-label="Route back to the main page"
+            className="h-full"
+          >
+            <PlanetIcon className="align-middle h-full" />
           </Link>
           <div className="flex gap-7 items-center">
             <div className="flex gap-3">

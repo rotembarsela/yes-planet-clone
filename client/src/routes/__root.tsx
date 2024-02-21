@@ -1,29 +1,17 @@
-import { createRootRoute, Link, Outlet } from "@tanstack/react-router";
+import { createRootRoute, Outlet } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
 
 export const Route = createRootRoute({
-  notFoundComponent: () => {
-    return (
-      <div>
-        Not Found 😢
-        <Link to="/" className="underline underline-offset-2">
-          Home
-        </Link>
-      </div>
-    );
-  },
-  component: Root,
-});
-
-function Root() {
-  return (
+  component: () => (
     <>
       <Header />
-      <Outlet />
+      <main className="min-h-[calc(100vh-470px)]">
+        <Outlet />
+      </main>
       <Footer />
       <TanStackRouterDevtools />
     </>
-  );
-}
+  ),
+});

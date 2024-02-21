@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /vip
+Allow: /screenx
+Allow: /4dx
+Allow: /imax
+Allow: /blog
+Allow: /giftsAndMovieCards
+Allow: /offers
+Allow: /whatson
