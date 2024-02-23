@@ -23,14 +23,16 @@ export type InternalLink<T extends string> = {
   url: T;
 };
 
-type FooterItem<T extends string> = {
+export interface IFooterItem<T extends string> {
   title: string;
   route: ExternalLink | InternalLink<T>;
   Icon?: FunctionComponent<SVGProps<SVGSVGElement>> | LucideIcon;
-};
+}
 
-export type FooterSection = {
+export interface IFooterSection {
   title: string;
-  items?: FooterItem<Route["route"]>[]; // change to RouteId type
-  children?: FooterSection[];
-};
+  items?: IFooterItem<Route["route"]>[]; // change to RouteId type
+  children?: IFooterSection[];
+}
+
+export type DateFormat = "yyyy-MM-dd" | "yyyy-dd-MM";

@@ -1,4 +1,4 @@
-import { FooterSection, Route } from "./types";
+import { IFooterSection, Route } from "./types";
 import IMaxIcon from "../assets/imax.svg?react";
 import FourDXIcon from "../assets/4dx.svg?react";
 import ScreenXIcon from "../assets/screenx.svg?react";
@@ -35,7 +35,7 @@ const routes: Route[] = [
   },
 ];
 
-const footerSections: FooterSection[] = [
+const footerSections: IFooterSection[] = [
   {
     title: "contact",
     children: [
