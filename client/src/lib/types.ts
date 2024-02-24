@@ -35,4 +35,34 @@ export interface IFooterSection {
   children?: IFooterSection[];
 }
 
-export type DateFormat = "yyyy-MM-dd" | "yyyy-dd-MM";
+export type Month =
+  | "January"
+  | "February"
+  | "March"
+  | "April"
+  | "May"
+  | "June"
+  | "July"
+  | "August"
+  | "September"
+  | "October"
+  | "November"
+  | "December";
+
+export type Monthly = {
+  month: Month;
+  weeksOfMonth: Weekly[];
+};
+
+export type Week = "Su" | "Mo" | "Tu" | "We" | "Th" | "Fr" | "Sa";
+
+export type Weekly = {
+  weekNumber: number;
+  days: number[];
+};
+
+export type DateFormat =
+  | "dd/MM/yyyy"
+  | "dd-MM-yyyy"
+  | "yyyy-MM-dd"
+  | "yyyy-dd-MM";
