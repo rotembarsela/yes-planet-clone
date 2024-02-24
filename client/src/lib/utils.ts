@@ -1,4 +1,11 @@
-import { format, getDay, getDaysInMonth, startOfMonth } from "date-fns";
+import {
+  format,
+  getDay,
+  getDaysInMonth,
+  getMonth,
+  parse,
+  startOfMonth,
+} from "date-fns";
 import { DateFormat, Weekly } from "./types";
 
 const dates = {
@@ -10,6 +17,35 @@ const dates = {
     monthIdx: number,
     year: number = new Date().getFullYear(),
   ) => getDay(startOfMonth(new Date(year, monthIdx - 1))),
+  getMonthIdx: (month: string) => getMonth(parse(month, "MMMM", new Date())),
+  futureDateFromToday: (days: number = 0) => {
+    const currentDate = new Date();
+    const futureDate = new Date(currentDate);
+    futureDate.setDate(currentDate.getDate() + (days - 1));
+    return futureDate;
+  },
+  isDateBetweenMinAndMaxDate: (date: Date, minDate: Date, maxDate: Date) =>
+    date >= minDate && date <= maxDate,
+  getDate: (
+    day: number = new Date().getDay(),
+    month: number = new Date().getMonth(),
+    year: number = new Date().getFullYear(),
+  ) => new Date(year, month, day),
+  compareDates: (firstDate: Date, secondDate: Date) => {
+    const firstDateYear = firstDate.getFullYear();
+    const firstDateMonth = firstDate.getMonth();
+    const firstDateDay = firstDate.getDate();
+
+    const secondDateYear = secondDate.getFullYear();
+    const secondDateMonth = secondDate.getMonth();
+    const secondDateDay = secondDate.getDate();
+
+    return (
+      firstDateYear === secondDateYear &&
+      firstDateMonth === secondDateMonth &&
+      firstDateDay === secondDateDay
+    );
+  },
 };
 
 const calendar = {
@@ -19,16 +55,13 @@ const calendar = {
     let currentWeekNumber = 1;
     let currentWeek: Weekly = { weekNumber: currentWeekNumber, days: [] };
 
-    // Fill in empty slots for days before the start day of the month
     for (let i = 0; i < startDayOfMonth; i++) {
-      currentWeek.days.push(0); // Assign 0 for empty slots
+      currentWeek.days.push(0);
     }
 
-    // Fill in days of the month
     for (let day = 1; day <= daysInMonth; day++) {
-      currentWeek.days.push(day); // Assign day to corresponding day of the week
+      currentWeek.days.push(day);
 
-      // If it's the end of the week, start a new week
       if (currentWeek.days.length === 7) {
         weeks.push(currentWeek);
         currentWeekNumber++;
@@ -36,12 +69,10 @@ const calendar = {
       }
     }
 
-    // Fill in remaining days in the last week with zeros
     while (currentWeek.days.length < 7) {
       currentWeek.days.push(0);
     }
 
-    // Add the last week to the weeks array
     weeks.push(currentWeek);
 
     return weeks;

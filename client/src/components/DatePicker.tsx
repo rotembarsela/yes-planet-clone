@@ -1,13 +1,11 @@
-import { PropsWithChildren, useMemo, useState } from "react";
+import { PropsWithChildren } from "react";
 import { CalendarDays } from "lucide-react";
 import { twMerge } from "tailwind-merge";
 import { utils } from "../lib/utils";
 import { data } from "../lib/data";
 import { Month, Monthly } from "../lib/types";
 
-type DatePickerProps = {} & PropsWithChildren;
-
-export const DatePicker = ({ children }: DatePickerProps) => {
+export const DatePicker = ({ children }: PropsWithChildren) => {
   return <div data-datepicker="wrapper">{children}</div>;
 };
 
@@ -25,7 +23,7 @@ DatePicker.Container = forwardRef<HTMLDivElement, DatePickerProps>(
 */
 
 type DatePickerInputProps = {
-  date: string;
+  date: Date;
   handleOpen: () => void;
   fullWidth?: boolean;
 };
@@ -47,7 +45,7 @@ DatePicker.Input = ({
         onClick={handleOpen}
         className="text-black cursor-pointer"
       />
-      <span>{date}</span>
+      <span>{utils.dates.dateFormat(date)}</span>
     </div>
   );
 };
@@ -116,16 +114,21 @@ DatePicker.Month = ({ selectedMonth, handleMonth }: DatePickerMonthProps) => {
 };
 
 type DatePickerCalendar = {
-  selectedMonth: Month;
+  selectedDate: Date;
+  selectedMonthly: Monthly | undefined;
+  onDateSelect: (selectedDay: number, selectedMonth: Month) => void;
+  minSelectDate: Date;
+  maxSelectDate: Date;
   // TODO: Props - minDate, maxDate, minSelectionDate, maxSelectionDate
 };
 
-DatePicker.Calendar = ({ selectedMonth }: DatePickerCalendar) => {
-  const selectedMonthly = useMemo(
-    () => data.calendar.find((month) => month.month === selectedMonth),
-    [selectedMonth],
-  );
-
+DatePicker.Calendar = ({
+  selectedDate,
+  selectedMonthly,
+  onDateSelect,
+  minSelectDate,
+  maxSelectDate,
+}: DatePickerCalendar) => {
   return selectedMonthly ? (
     <table
       className="w-full border-spacing-1 border-separate"
@@ -143,14 +146,39 @@ DatePicker.Calendar = ({ selectedMonth }: DatePickerCalendar) => {
           <tr key={week.weekNumber}>
             {week.days.map((day, idx) =>
               utils.calendar.isZeroDay(day) ? (
-                <td
-                  key={day + idx}
-                  className="text-center w-10 h-10 border border-[#ddd] rounded-s rounded-e cursor-pointer select-none hover:bg-orange-500 hover:text-white"
-                >
-                  {day}
+                <td key={day + idx} className="text-center">
+                  <button
+                    disabled={
+                      !utils.dates.isDateBetweenMinAndMaxDate(
+                        utils.dates.getDate(
+                          day,
+                          utils.dates.getMonthIdx(selectedMonthly.month),
+                        ),
+                        minSelectDate,
+                        maxSelectDate,
+                      )
+                    }
+                    className={twMerge(
+                      utils.dates.compareDates(
+                        selectedDate,
+                        utils.dates.getDate(
+                          day,
+                          utils.dates.getMonthIdx(selectedMonthly.month),
+                        ),
+                      )
+                        ? "border-2 border-orange-500"
+                        : "border border-[#ddd]",
+                      "w-10 h-10 rounded-s rounded-e cursor-pointer select-none text-orange-500 hover:bg-orange-500 hover:text-white disabled:pointer-events-none disabled:text-[#bab9b9]",
+                    )}
+                    onClick={() => onDateSelect(day, selectedMonthly.month)}
+                  >
+                    {day}
+                  </button>
                 </td>
               ) : (
-                <td className="pointer-events-none">&nbsp;</td>
+                <td key={day + idx} className="pointer-events-none">
+                  &nbsp;
+                </td>
               ),
             )}
           </tr>

@@ -38,7 +38,7 @@ export const Carousel = ({ images = [] }: CarouselProps) => {
     }, DELAY);
 
     return () => clearInterval(intervalRef);
-  }, []);
+  }, [dragX, images.length]);
 
   const onDragEnd = () => {
     const x = dragX.get();
