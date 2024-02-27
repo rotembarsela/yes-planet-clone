@@ -1,5 +1,5 @@
-import { PropsWithChildren } from "react";
-import { CalendarDays } from "lucide-react";
+import { PropsWithChildren, forwardRef } from "react";
+import { CalendarDays, ChevronLeft, ChevronRight } from "lucide-react";
 import { twMerge } from "tailwind-merge";
 import { utils } from "../lib/utils";
 import { data } from "../lib/data";
@@ -9,70 +9,67 @@ export const DatePicker = ({ children }: PropsWithChildren) => {
   return <div data-datepicker="wrapper">{children}</div>;
 };
 
-/*
-DatePicker.Container = forwardRef<HTMLDivElement, DatePickerProps>(
-  (props, ref) => {
-    const { children } = props;
-    return (
-      <div ref={ref} className="relative text-black">
-        {children}
-      </div>
-    );
-  },
-);
-*/
-
 type DatePickerInputProps = {
   date: Date;
   handleOpen: () => void;
   fullWidth?: boolean;
 };
 
-DatePicker.Input = ({
-  date,
-  handleOpen,
-  fullWidth = false,
-}: DatePickerInputProps) => {
-  return (
-    <div
-      className={twMerge(
-        fullWidth ? "w-full" : "w-fit",
-        "flex items-center gap-5",
-      )}
-      data-datepicker="input"
-    >
-      <CalendarDays
-        onClick={handleOpen}
-        className="text-black cursor-pointer"
-      />
-      <span>{utils.dates.dateFormat(date)}</span>
-    </div>
-  );
-};
+DatePicker.Input = forwardRef<HTMLButtonElement, DatePickerInputProps>(
+  (props, ref) => {
+    const { date, handleOpen, fullWidth } = props;
+
+    return (
+      <div
+        className={twMerge(
+          fullWidth ? "w-full" : "w-fit",
+          "flex items-center gap-5",
+        )}
+        data-datepicker="input"
+      >
+        <button
+          ref={ref}
+          onClick={handleOpen}
+          className="text-black cursor-pointer"
+        >
+          <CalendarDays />
+        </button>
+        <span>{utils.dates.dateFormat(date)}</span>
+      </div>
+    );
+  },
+);
 
 type DatePickerBodyProps = {
   handleClose: () => void;
 } & PropsWithChildren;
 
-DatePicker.Body = ({ children, handleClose }: DatePickerBodyProps) => {
-  return (
-    <div
-      className="fixed top-0 left-0 z-50 bg-black bg-opacity-25 h-screen w-screen flex flex-col justify-center items-center"
-      data-datepicker="bg-cover"
-    >
-      <div className="relative w-[368px] h-[445px] p-5 bg-white text-black shadow-xl rounded-sm">
-        <span
-          onClick={handleClose}
-          className="absolute top-8 right-8 cursor-pointer hover:font-bold"
-          data-datepicker="body"
+DatePicker.Body = forwardRef<HTMLDivElement, DatePickerBodyProps>(
+  (props, ref) => {
+    const { children, handleClose } = props;
+
+    return (
+      <div
+        className="fixed top-0 left-0 z-50 bg-black bg-opacity-25 h-screen w-screen flex flex-col justify-center items-center"
+        data-datepicker="bg-cover"
+      >
+        <div
+          ref={ref}
+          className="relative w-[368px] min-h-[445px] flex flex-col gap-5 p-5 bg-white text-black shadow-xl rounded-sm"
         >
-          &#10005;
-        </span>
-        {children}
+          <button
+            onClick={handleClose}
+            className="absolute top-8 right-8 cursor-pointer hover:font-bold"
+            data-datepicker="body"
+          >
+            &#10005;
+          </button>
+          {children}
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  },
+);
 
 DatePicker.Title = ({ children }: PropsWithChildren) => {
   return (
@@ -97,17 +94,17 @@ DatePicker.Month = ({ selectedMonth, handleMonth }: DatePickerMonthProps) => {
       data-datepicker="month"
     >
       <button
-        className="absolute top-0 left-0"
+        className="absolute top-0 left-0 font-bold"
         onClick={() => handleMonth(selectedMonth, -1)}
       >
-        &lt;
+        <ChevronLeft />
       </button>
       <span>{selectedMonth}</span>
       <button
-        className="absolute top-0 right-0"
+        className="absolute top-0 right-0 font-bold"
         onClick={() => handleMonth(selectedMonth, 1)}
       >
-        &gt;
+        <ChevronRight />
       </button>
     </div>
   );
@@ -137,7 +134,9 @@ DatePicker.Calendar = ({
       <thead>
         <tr>
           {data.week.map((day) => (
-            <th key={day}>{day}</th>
+            <th key={day} className="p-1">
+              {day}
+            </th>
           ))}
         </tr>
       </thead>
@@ -191,5 +190,5 @@ DatePicker.Calendar = ({
 };
 
 DatePicker.Info = ({ children }: PropsWithChildren) => {
-  return <p data-datepicker="info">{children}</p>;
+  return <div data-datepicker="info">{children}</div>;
 };

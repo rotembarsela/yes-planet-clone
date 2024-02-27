@@ -69,11 +69,12 @@ const calendar = {
       }
     }
 
-    while (currentWeek.days.length < 7) {
-      currentWeek.days.push(0);
+    if (currentWeek.days.length > 0) {
+      while (currentWeek.days.length < 7) {
+        currentWeek.days.push(0);
+      }
+      weeks.push(currentWeek);
     }
-
-    weeks.push(currentWeek);
 
     return weeks;
   },

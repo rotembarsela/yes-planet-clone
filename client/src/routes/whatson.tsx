@@ -4,13 +4,15 @@ import { utils } from "../lib/utils";
 import { useMemo, useState } from "react";
 import { Month } from "../lib/types";
 import { data } from "../lib/data";
+import { CalendarClock } from "lucide-react";
+import { useFocusTrap } from "../hooks/useFocusLock";
 
 export const Route = createFileRoute("/whatson")({
   component: WhatsOnPage,
 });
 
 function WhatsOnPage() {
-  const [showModal, setShowModal] = useState(true);
+  const [showModal, setShowModal] = useState(false);
   const [selectedMonth, setSelectedMonth] = useState<Month>("February");
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
 
@@ -20,6 +22,7 @@ function WhatsOnPage() {
 
   const handleClose = () => {
     setShowModal(false);
+    dropDownBtnRef.current?.focus();
   };
 
   const handleMonthChange = (currMonth: Month, idx: 1 | -1) => {
@@ -46,7 +49,7 @@ function WhatsOnPage() {
     );
 
     setSelectedDate(date);
-    setShowModal(false);
+    handleClose();
   };
 
   const selectedMonthly = useMemo(
@@ -54,12 +57,18 @@ function WhatsOnPage() {
     [selectedMonth],
   );
 
+  const [dropDownRef, dropDownBtnRef] = useFocusTrap(showModal, handleClose);
+
   return (
     <div className="h-[500px] bg-white text-black">
       <DatePicker>
-        <DatePicker.Input date={selectedDate} handleOpen={handleOpen} />
+        <DatePicker.Input
+          ref={dropDownBtnRef}
+          date={selectedDate}
+          handleOpen={handleOpen}
+        />
         {showModal ? (
-          <DatePicker.Body handleClose={handleClose}>
+          <DatePicker.Body ref={dropDownRef} handleClose={handleClose}>
             <DatePicker.Title>Choose a date</DatePicker.Title>
             <DatePicker.Month
               selectedMonth={selectedMonth}
@@ -73,7 +82,10 @@ function WhatsOnPage() {
               maxSelectDate={utils.dates.futureDateFromToday(8)}
             />
             <DatePicker.Info>
-              A new schedule is available every Tuesday
+              <div className="flex items-center justify-between">
+                <CalendarClock />
+                <p>A new schedule is available every Tuesday</p>
+              </div>
             </DatePicker.Info>
           </DatePicker.Body>
         ) : null}
