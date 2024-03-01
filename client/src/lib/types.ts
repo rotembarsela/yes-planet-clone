@@ -66,3 +66,13 @@ export type DateFormat =
   | "dd-MM-yyyy"
   | "yyyy-MM-dd"
   | "yyyy-dd-MM";
+
+export interface ITabs {
+  title: string;
+  component: JSX.Element;
+}
+
+export interface IPromoLink {
+  title: string;
+  subTitle?: string;
+}

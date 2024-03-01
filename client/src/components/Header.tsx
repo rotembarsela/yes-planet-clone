@@ -1,4 +1,4 @@
-import { Navbar } from "./Navbar";
+import { Navbar } from "./header/Navbar";
 import PlanetIcon from "../assets/planet-logo.svg?react";
 import { Link } from "@tanstack/react-router";
 import { MapPin, Search, UserRound } from "lucide-react";

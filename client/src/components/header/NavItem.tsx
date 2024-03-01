@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Route } from "../lib/types";
+import { Route } from "../../lib/types";
 
 type NavItemProps = {
   route: Route;

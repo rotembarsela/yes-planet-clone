@@ -1,5 +1,5 @@
 import { NavItem } from "./NavItem";
-import { data } from "../lib/data";
+import { data } from "../../lib/data";
 
 export const Navbar = () => {
   return (

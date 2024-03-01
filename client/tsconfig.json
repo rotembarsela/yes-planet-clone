@@ -20,7 +20,14 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
 
-    "types": ["vite-plugin-svgr/client"]
+    "types": ["vite-plugin-svgr/client"],
+
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*", "./dist/*", ""],
+      "components/*": ["./src/components/*"],
+      "routes/*": ["./src/routes/*"]
+    }
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
