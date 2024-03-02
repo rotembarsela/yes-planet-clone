@@ -17,7 +17,7 @@ type DatePickerInputProps = {
 
 DatePicker.Input = forwardRef<HTMLButtonElement, DatePickerInputProps>(
   (props, ref) => {
-    const { date, handleOpen, fullWidth } = props;
+    const { handleOpen, fullWidth } = props;
 
     return (
       <div
@@ -34,7 +34,6 @@ DatePicker.Input = forwardRef<HTMLButtonElement, DatePickerInputProps>(
         >
           <CalendarDays />
         </button>
-        <span>{utils.dates.dateFormat(date)}</span>
       </div>
     );
   },

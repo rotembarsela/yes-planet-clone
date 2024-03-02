@@ -8,7 +8,7 @@ export const Route = createRootRoute({
   component: () => (
     <>
       <Header />
-      <main className="min-h-[calc(100vh-470px)] w-[980px] m-auto">
+      <main className="min-h-[calc(100vh-470px)] w-full m-auto">
         <Outlet />
       </main>
       <InfoPannel />

@@ -1,6 +1,7 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
 import { Carousel } from "../components/Carousel";
-import { MovieDatePicker } from "../components/MovieDatePicker";
+import { BookNow } from "@/components/index/BookNow";
+import { MoviesList } from "@/components/index/MoviesList";
 
 export const Route = createLazyFileRoute("/")({
   component: IndexPage,
@@ -14,11 +15,16 @@ const imagesTemp = [
 
 function IndexPage() {
   return (
-    <div>
-      <div className="h-[418px] relative overflow-hidden">
+    <div className="flex flex-col">
+      <section className="h-[390px] relative overflow-hidden">
         <Carousel images={imagesTemp} />
+      </section>
+      <div className="w-full bg-white text-black py-[30px]">
+        <div className="w-[980px] m-auto">
+          <BookNow />
+          <MoviesList />
+        </div>
       </div>
-      <MovieDatePicker />
     </div>
   );
 }

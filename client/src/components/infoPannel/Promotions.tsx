@@ -19,7 +19,7 @@ export const Promotions = () => {
       <Card src={SpecialDiscountsImage} />
       <ul>
         {links.map((link) => (
-          <li className="group border-y border-[#191919]">
+          <li key={link.title} className="group border-y border-[#191919]">
             <PromoLink promoLink={link} />
           </li>
         ))}

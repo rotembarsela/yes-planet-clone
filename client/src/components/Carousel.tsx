@@ -65,7 +65,7 @@ export const Carousel = ({ images = [] }: CarouselProps) => {
         }}
         transition={SPRING_OPTIONS}
         onDragEnd={onDragEnd}
-        className="h-[390px] flex items-center cursor-grab active:cursor-grabbing"
+        className="h-[390px] w-full flex items-center cursor-grab active:cursor-grabbing"
       >
         <Images imgIndex={imgIndex} images={images} />
         <GradientEdges />
@@ -113,16 +113,18 @@ const Dots = ({
   images: string[];
 }) => {
   return (
-    <div className="mt-4 flex justify-center gap-2">
-      {images.map((_, idx) => (
-        <button
-          key={idx}
-          onClick={() => setImgIndex(idx)}
-          className={`h-3 w-3 rounded-full transition-colors ${
-            idx === imgIndex ? "bg-neutral-50" : "bg-neutral-500"
-          }`}
-        />
-      ))}
+    <div className="absolute bottom-3 left-1/2">
+      <div className="flex justify-center gap-2">
+        {images.map((_, idx) => (
+          <button
+            key={idx}
+            onClick={() => setImgIndex(idx)}
+            className={`h-3 w-3 rounded-full transition-colors ${
+              idx === imgIndex ? "bg-neutral-50" : "bg-neutral-500"
+            }`}
+          />
+        ))}
+      </div>
     </div>
   );
 };

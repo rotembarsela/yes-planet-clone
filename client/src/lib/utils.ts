@@ -6,7 +6,7 @@ import {
   parse,
   startOfMonth,
 } from "date-fns";
-import { DateFormat, Weekly } from "./types";
+import { DateFormat, Month, Weekly } from "./types";
 
 const dates = {
   dateFormat: (date: Date, formatStr: DateFormat = "dd/MM/yyyy") =>
@@ -17,6 +17,7 @@ const dates = {
     monthIdx: number,
     year: number = new Date().getFullYear(),
   ) => getDay(startOfMonth(new Date(year, monthIdx - 1))),
+  getCurrentMonth: () => format(new Date(), "MMMM") as Month,
   getMonthIdx: (month: string) => getMonth(parse(month, "MMMM", new Date())),
   futureDateFromToday: (days: number = 0) => {
     const currentDate = new Date();
