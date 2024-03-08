@@ -1,8 +1,16 @@
-import { Monthly, IFooterSection, Route, Month, Week } from "./types";
+import {
+  Monthly,
+  IFooterSection,
+  Route,
+  Month,
+  Week,
+  IMovieToBook,
+} from "./types";
 import IMaxIcon from "../assets/imax.svg?react";
 import FourDXIcon from "../assets/4dx.svg?react";
 import ScreenXIcon from "../assets/screenx.svg?react";
 import VipIcon from "../assets/vip.svg?react";
+import AnyoneButYouMovie from "@/assets/movies/anyone-but-you.webp";
 import { utils } from "./utils";
 
 const routes: Route[] = [
@@ -307,10 +315,30 @@ const calendar: Monthly[] = [
   },
 ];
 
+// TODO: Replace with API data
+const movies: IMovieToBook[] = [
+  {
+    title: "Anyone But You",
+    restriction: "12",
+    halls: ["2D"],
+    genre: ["Comedy"],
+    lengthInMinutes: 103,
+    screeningTimes: ["19:20", "21:30"],
+    language: {
+      title: "EN",
+      subtitles: "HE",
+    },
+    youtubeEmbed:
+      "https://www.youtube-nocookie.com/embed/bBNS9MRWIew?autoplay=1&hd=1&wmode=transparent&rel=0&controls=1&showinfo=0",
+    image: AnyoneButYouMovie,
+  },
+];
+
 export const data = {
   routes,
   footerSections,
   months,
   week,
   calendar,
+  movies,
 };

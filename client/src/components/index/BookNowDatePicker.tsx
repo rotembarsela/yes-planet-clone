@@ -11,7 +11,7 @@ import { Month } from "@/lib/types";
 import { data } from "@/lib/data";
 import { utils } from "@/lib/utils";
 import { CalendarClock } from "lucide-react";
-import { useFocusTrap } from "@/hooks/useFocusLock";
+import { useFocusTrap } from "@/hooks/useFocusTrap";
 
 export const BookNowDatePicker = () => {
   const datePicker = useAppSelector((state) => state.datePicker);

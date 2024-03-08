@@ -1,17 +1,63 @@
 import { utils } from "@/lib/utils";
 import { BookNowDatePicker } from "./BookNowDatePicker";
 import { useAppSelector } from "@/lib/store/hooks";
+import { Select } from "../Select";
+import { useState } from "react";
+
+interface IPlanet {
+  planetId: string;
+  planetValue: string;
+}
+
+const planets: IPlanet[] = [
+  {
+    planetId: "1",
+    planetValue: "Planet Ayalon",
+  },
+  {
+    planetId: "2",
+    planetValue: "Planet Beer Sheva",
+  },
+  {
+    planetId: "3",
+    planetValue: "Planet Zichron Yaakov",
+  },
+  {
+    planetId: "4",
+    planetValue: "Planet Haifa",
+  },
+  {
+    planetId: "5",
+    planetValue: "Planet Jerusalem",
+  },
+  {
+    planetId: "6",
+    planetValue: "Planet Rishon LeTziyon",
+  },
+];
+
+const initialPlanet: IPlanet = planets[0];
 
 export const BookNow = () => {
   const datePicker = useAppSelector((state) => state.datePicker);
+  const [planet, setPlanet] = useState<IPlanet>(initialPlanet);
+
+  const handleSelectPlanet = (planetToSelect: IPlanet) => {
+    setPlanet(planetToSelect);
+  };
 
   return (
-    <div className="flex flex-col gap-7">
+    <div className="w-[980px] m-auto flex flex-col gap-7">
       <h1 className="text-2xl font-bold uppercase">Book Now</h1>
       <div className="flex justify-between items-center">
-        <div className="border border-[#e2e2e2] rounded text-sm font-bold py-[6px] pl-3 pr-[25px] shadow-sm">
-          Planet X
-        </div>
+        <Select
+          items={planets}
+          value={planet}
+          onSelect={handleSelectPlanet}
+          valueId="planetId"
+          valueLabel="planetValue"
+        />
+
         <div className="inline-flex rounded-md shadow-sm" role="group">
           <button
             type="button"

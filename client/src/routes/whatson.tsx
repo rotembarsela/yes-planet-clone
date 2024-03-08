@@ -5,7 +5,7 @@ import { useMemo, useState } from "react";
 import { Month } from "../lib/types";
 import { data } from "../lib/data";
 import { CalendarClock } from "lucide-react";
-import { useFocusTrap } from "../hooks/useFocusLock";
+import { useFocusTrap } from "../hooks/useFocusTrap";
 
 export const Route = createFileRoute("/whatson")({
   component: WhatsOnPage,

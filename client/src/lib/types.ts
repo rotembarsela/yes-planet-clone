@@ -76,3 +76,45 @@ export interface IPromoLink {
   title: string;
   subTitle?: string;
 }
+
+const moviesHalls = [
+  "2D",
+  "2D VIP",
+  "2D SCREENX",
+  "2D IMAX",
+  "2D 4DX",
+] as const;
+
+export type MovieHall = (typeof moviesHalls)[number];
+
+const movieGenres = [
+  "Action",
+  "Adventure",
+  "Comedy",
+  "Drama",
+  "Fantasy",
+  "Horror",
+  "Mystery",
+  "Romance",
+  "Sci-Fi",
+  "Thriller",
+] as const;
+
+export type MovieGenre = (typeof movieGenres)[number];
+
+type MovieLanguage = {
+  title: string;
+  subtitles?: "EN" | "HE";
+};
+
+export interface IMovieToBook {
+  title: string;
+  restriction: "12" | "14" | "16" | "18" | "No Limit";
+  halls: MovieHall[];
+  genre: MovieGenre[];
+  lengthInMinutes: number;
+  screeningTimes: string[];
+  language: MovieLanguage;
+  youtubeEmbed: string;
+  image?: string;
+}

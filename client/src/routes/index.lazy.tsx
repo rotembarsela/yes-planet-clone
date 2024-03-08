@@ -20,10 +20,10 @@ function IndexPage() {
         <Carousel images={imagesTemp} />
       </section>
       <div className="w-full bg-white text-black py-[30px]">
-        <div className="w-[980px] m-auto">
-          <BookNow />
-          <MoviesList />
-        </div>
+        <BookNow />
+      </div>
+      <div className="w-full bg-gradient-to-b from-[#f4f4f4] to-white text-black py-[30px] border-t border-gray-200">
+        <MoviesList />
       </div>
     </div>
   );
