@@ -12,137 +12,137 @@ import { createFileRoute } from '@tanstack/react-router'
 
 // Import Routes
 
-import { Route as rootRoute } from "./routes/__root";
-import { Route as WhatsonImport } from "./routes/whatson";
-import { Route as VipImport } from "./routes/vip";
-import { Route as ScreenxImport } from "./routes/screenx";
-import { Route as OffersImport } from "./routes/offers";
-import { Route as ImaxImport } from "./routes/imax";
-import { Route as GiftsAndMovieCardsImport } from "./routes/giftsAndMovieCards";
-import { Route as BlogImport } from "./routes/blog";
-import { Route as LayoutImport } from "./routes/_layout";
-import { Route as R404Import } from "./routes/__404";
-import { Route as R4dxImport } from "./routes/4dx";
+import { Route as rootRoute } from './routes/__root'
+import { Route as WhatsonImport } from './routes/whatson'
+import { Route as VipImport } from './routes/vip'
+import { Route as ScreenxImport } from './routes/screenx'
+import { Route as OffersImport } from './routes/offers'
+import { Route as ImaxImport } from './routes/imax'
+import { Route as GiftsAndMovieCardsImport } from './routes/giftsAndMovieCards'
+import { Route as BlogImport } from './routes/blog'
+import { Route as LayoutImport } from './routes/_layout'
+import { Route as R404Import } from './routes/__404'
+import { Route as R4dxImport } from './routes/4dx'
 
 // Create Virtual Routes
 
-const AboutLazyImport = createFileRoute("/about")();
-const IndexLazyImport = createFileRoute("/")();
+const AboutLazyImport = createFileRoute('/about')()
+const IndexLazyImport = createFileRoute('/')()
 
 // Create/Update Routes
 
 const AboutLazyRoute = AboutLazyImport.update({
-  path: "/about",
+  path: '/about',
   getParentRoute: () => rootRoute,
-} as any).lazy(() => import("./routes/about.lazy").then((d) => d.Route));
+} as any).lazy(() => import('./routes/about.lazy').then((d) => d.Route))
 
 const WhatsonRoute = WhatsonImport.update({
-  path: "/whatson",
+  path: '/whatson',
   getParentRoute: () => rootRoute,
-} as any);
+} as any)
 
 const VipRoute = VipImport.update({
-  path: "/vip",
+  path: '/vip',
   getParentRoute: () => rootRoute,
-} as any);
+} as any)
 
 const ScreenxRoute = ScreenxImport.update({
-  path: "/screenx",
+  path: '/screenx',
   getParentRoute: () => rootRoute,
-} as any);
+} as any)
 
 const OffersRoute = OffersImport.update({
-  path: "/offers",
+  path: '/offers',
   getParentRoute: () => rootRoute,
-} as any);
+} as any)
 
 const ImaxRoute = ImaxImport.update({
-  path: "/imax",
+  path: '/imax',
   getParentRoute: () => rootRoute,
-} as any);
+} as any)
 
 const GiftsAndMovieCardsRoute = GiftsAndMovieCardsImport.update({
-  path: "/giftsAndMovieCards",
+  path: '/giftsAndMovieCards',
   getParentRoute: () => rootRoute,
-} as any);
+} as any)
 
 const BlogRoute = BlogImport.update({
-  path: "/blog",
+  path: '/blog',
   getParentRoute: () => rootRoute,
-} as any);
+} as any)
 
 const LayoutRoute = LayoutImport.update({
-  id: "/_layout",
+  id: '/_layout',
   getParentRoute: () => rootRoute,
-} as any);
+} as any)
 
 const R404Route = R404Import.update({
-  id: "/__404",
+  id: '/__404',
   getParentRoute: () => rootRoute,
-} as any);
+} as any)
 
 const R4dxRoute = R4dxImport.update({
-  path: "/4dx",
+  path: '/4dx',
   getParentRoute: () => rootRoute,
-} as any);
+} as any)
 
 const IndexLazyRoute = IndexLazyImport.update({
-  path: "/",
+  path: '/',
   getParentRoute: () => rootRoute,
-} as any).lazy(() => import("./routes/index.lazy").then((d) => d.Route));
+} as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
 
 // Populate the FileRoutesByPath interface
 
-declare module "@tanstack/react-router" {
+declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    "/": {
-      preLoaderRoute: typeof IndexLazyImport;
-      parentRoute: typeof rootRoute;
-    };
-    "/4dx": {
-      preLoaderRoute: typeof R4dxImport;
-      parentRoute: typeof rootRoute;
-    };
-    "/__404": {
-      preLoaderRoute: typeof R404Import;
-      parentRoute: typeof rootRoute;
-    };
-    "/_layout": {
-      preLoaderRoute: typeof LayoutImport;
-      parentRoute: typeof rootRoute;
-    };
-    "/blog": {
-      preLoaderRoute: typeof BlogImport;
-      parentRoute: typeof rootRoute;
-    };
-    "/giftsAndMovieCards": {
-      preLoaderRoute: typeof GiftsAndMovieCardsImport;
-      parentRoute: typeof rootRoute;
-    };
-    "/imax": {
-      preLoaderRoute: typeof ImaxImport;
-      parentRoute: typeof rootRoute;
-    };
-    "/offers": {
-      preLoaderRoute: typeof OffersImport;
-      parentRoute: typeof rootRoute;
-    };
-    "/screenx": {
-      preLoaderRoute: typeof ScreenxImport;
-      parentRoute: typeof rootRoute;
-    };
-    "/vip": {
-      preLoaderRoute: typeof VipImport;
-      parentRoute: typeof rootRoute;
-    };
-    "/whatson": {
-      preLoaderRoute: typeof WhatsonImport;
-      parentRoute: typeof rootRoute;
-    };
-    "/about": {
-      preLoaderRoute: typeof AboutLazyImport;
-      parentRoute: typeof rootRoute;
-    };
+    '/': {
+      preLoaderRoute: typeof IndexLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/4dx': {
+      preLoaderRoute: typeof R4dxImport
+      parentRoute: typeof rootRoute
+    }
+    '/__404': {
+      preLoaderRoute: typeof R404Import
+      parentRoute: typeof rootRoute
+    }
+    '/_layout': {
+      preLoaderRoute: typeof LayoutImport
+      parentRoute: typeof rootRoute
+    }
+    '/blog': {
+      preLoaderRoute: typeof BlogImport
+      parentRoute: typeof rootRoute
+    }
+    '/giftsAndMovieCards': {
+      preLoaderRoute: typeof GiftsAndMovieCardsImport
+      parentRoute: typeof rootRoute
+    }
+    '/imax': {
+      preLoaderRoute: typeof ImaxImport
+      parentRoute: typeof rootRoute
+    }
+    '/offers': {
+      preLoaderRoute: typeof OffersImport
+      parentRoute: typeof rootRoute
+    }
+    '/screenx': {
+      preLoaderRoute: typeof ScreenxImport
+      parentRoute: typeof rootRoute
+    }
+    '/vip': {
+      preLoaderRoute: typeof VipImport
+      parentRoute: typeof rootRoute
+    }
+    '/whatson': {
+      preLoaderRoute: typeof WhatsonImport
+      parentRoute: typeof rootRoute
+    }
+    '/about': {
+      preLoaderRoute: typeof AboutLazyImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -161,4 +161,4 @@ export const routeTree = rootRoute.addChildren([
   VipRoute,
   WhatsonRoute,
   AboutLazyRoute,
-]);
+])

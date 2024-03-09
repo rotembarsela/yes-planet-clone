@@ -118,3 +118,18 @@ export interface IMovieToBook {
   youtubeEmbed: string;
   image?: string;
 }
+
+export interface IPlanet {
+  planetId: string;
+  planetValue: string;
+}
+
+export interface IMovie {
+  movieId: string;
+  movieValue: string;
+}
+
+export interface IScreening {
+  screeningId: string;
+  screeningValue: string;
+}

@@ -1,49 +1,33 @@
 import { utils } from "@/lib/utils";
 import { BookNowDatePicker } from "./BookNowDatePicker";
 import { useAppSelector } from "@/lib/store/hooks";
-import { Select } from "../Select";
+import { Select } from "../select/Select";
 import { useState } from "react";
+import { IMovie, IPlanet, IScreening } from "@/lib/types";
+import { mocks } from "@/lib/mocks";
 
-interface IPlanet {
-  planetId: string;
-  planetValue: string;
-}
+const initialPlanet: IPlanet = mocks.planets[0];
 
-const planets: IPlanet[] = [
-  {
-    planetId: "1",
-    planetValue: "Planet Ayalon",
-  },
-  {
-    planetId: "2",
-    planetValue: "Planet Beer Sheva",
-  },
-  {
-    planetId: "3",
-    planetValue: "Planet Zichron Yaakov",
-  },
-  {
-    planetId: "4",
-    planetValue: "Planet Haifa",
-  },
-  {
-    planetId: "5",
-    planetValue: "Planet Jerusalem",
-  },
-  {
-    planetId: "6",
-    planetValue: "Planet Rishon LeTziyon",
-  },
-];
+const initialMovie: IMovie = mocks.movies[0];
 
-const initialPlanet: IPlanet = planets[0];
+const initialScreening: IScreening = mocks.screenings[0];
 
 export const BookNow = () => {
   const datePicker = useAppSelector((state) => state.datePicker);
   const [planet, setPlanet] = useState<IPlanet>(initialPlanet);
+  const [movie, setMovie] = useState<IMovie>(initialMovie);
+  const [screening, setScreening] = useState<IScreening>(initialScreening);
 
-  const handleSelectPlanet = (planetToSelect: IPlanet) => {
+  const handlePlanetSelect = (planetToSelect: IPlanet) => {
     setPlanet(planetToSelect);
+  };
+
+  const handleMovieSelect = (movieToSelect: IMovie) => {
+    setMovie(movieToSelect);
+  };
+
+  const handlScreeningSelect = (screeningToSelect: IScreening) => {
+    setScreening(screeningToSelect);
   };
 
   return (
@@ -51,13 +35,12 @@ export const BookNow = () => {
       <h1 className="text-2xl font-bold uppercase">Book Now</h1>
       <div className="flex justify-between items-center">
         <Select
-          items={planets}
+          items={mocks.planets}
           value={planet}
-          onSelect={handleSelectPlanet}
+          onSelect={handlePlanetSelect}
           valueId="planetId"
           valueLabel="planetValue"
         />
-
         <div className="inline-flex rounded-md shadow-sm" role="group">
           <button
             type="button"
@@ -91,12 +74,20 @@ export const BookNow = () => {
           </div>
         </div>
         <div className="flex items-center gap-5">
-          <div className="border border-[#e2e2e2] rounded text-sm font-bold py-[6px] pl-3 pr-[25px] shadow-sm">
-            Choose a Screening T
-          </div>
-          <div className="border border-[#e2e2e2] rounded text-sm font-bold py-[6px] pl-3 pr-[25px] shadow-sm">
-            Choose a Movie
-          </div>
+          <Select
+            items={mocks.screenings}
+            value={screening}
+            onSelect={handlScreeningSelect}
+            valueId="screeningId"
+            valueLabel="screeningValue"
+          />
+          <Select
+            items={mocks.movies}
+            value={movie}
+            onSelect={handleMovieSelect}
+            valueId="movieId"
+            valueLabel="movieValue"
+          />
         </div>
       </div>
       <span className="text-lg font-bold">
