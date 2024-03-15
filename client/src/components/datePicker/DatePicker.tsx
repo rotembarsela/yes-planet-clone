@@ -1,12 +1,16 @@
 import { PropsWithChildren, forwardRef } from "react";
 import { CalendarDays, ChevronLeft, ChevronRight } from "lucide-react";
 import { twMerge } from "tailwind-merge";
-import { utils } from "../lib/utils";
-import { data } from "../lib/data";
-import { Month, Monthly } from "../lib/types";
+import { utils } from "../../lib/utils";
+import { data } from "../../lib/data";
+import { Month, Monthly } from "../../lib/types";
 
-export const DatePicker = ({ children }: PropsWithChildren) => {
-  return <div data-datepicker="wrapper">{children}</div>;
+export const DatePicker = ({ children, ...props }: PropsWithChildren) => {
+  return (
+    <div data-datepicker="wrapper" {...props}>
+      {children}
+    </div>
+  );
 };
 
 type DatePickerInputProps = {

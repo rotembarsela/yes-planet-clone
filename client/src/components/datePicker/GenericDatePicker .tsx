@@ -1,19 +1,31 @@
+import { useFocusTrap } from "@/hooks/useFocusTrap";
+import { data } from "@/lib/data";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
-import { DatePicker } from "../datePicker/DatePicker";
 import {
   closeModal,
   openModal,
   setSelectedDate,
   setSelectedMonth,
 } from "@/lib/store/slices/datePickerSlice";
-import { useMemo } from "react";
 import { Month } from "@/lib/types";
-import { data } from "@/lib/data";
 import { utils } from "@/lib/utils";
+import { useMemo } from "react";
+import { DatePicker } from "./DatePicker";
 import { CalendarClock } from "lucide-react";
-import { useFocusTrap } from "@/hooks/useFocusTrap";
 
-export const BookNowDatePicker = () => {
+type GenericDatePickerProps = {
+  title?: string;
+  info?: string;
+  minSelectDate?: Date;
+  maxSelectDate?: Date;
+};
+
+export const GenericDatePicker = ({
+  title = "Choose a date",
+  info = "A new schedule is available every Tuesday",
+  minSelectDate = utils.dates.futureDateFromToday(),
+  maxSelectDate = utils.dates.futureDateFromToday(8),
+}: GenericDatePickerProps) => {
   const datePicker = useAppSelector((state) => state.datePicker);
   const dispatch = useAppDispatch();
 
@@ -69,7 +81,7 @@ export const BookNowDatePicker = () => {
       />
       {showModal ? (
         <DatePicker.Body ref={dropDownRef} handleClose={handleClose}>
-          <DatePicker.Title>Choose a date</DatePicker.Title>
+          <DatePicker.Title>{title}</DatePicker.Title>
           <DatePicker.Month
             selectedMonth={selectedMonth}
             handleMonth={handleMonthChange}
@@ -78,13 +90,13 @@ export const BookNowDatePicker = () => {
             selectedDate={selectedDate}
             selectedMonthly={selectedMonthly}
             onDateSelect={handleDateSelect}
-            minSelectDate={utils.dates.futureDateFromToday()}
-            maxSelectDate={utils.dates.futureDateFromToday(8)}
+            minSelectDate={minSelectDate}
+            maxSelectDate={maxSelectDate}
           />
           <DatePicker.Info>
             <div className="flex items-center justify-between">
+              <p>{info}</p>
               <CalendarClock />
-              <p>A new schedule is available every Tuesday</p>
             </div>
           </DatePicker.Info>
         </DatePicker.Body>

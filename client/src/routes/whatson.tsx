@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { DatePicker } from "../components/DatePicker";
+import { DatePicker } from "../components/datePicker/DatePicker";
 import { utils } from "../lib/utils";
 import { useMemo, useState } from "react";
 import { Month } from "../lib/types";

@@ -7,6 +7,8 @@ import {
   startOfMonth,
 } from "date-fns";
 import { DateFormat, Month, Weekly } from "./types";
+import clsx, { ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 const dates = {
   dateFormat: (date: Date, formatStr: DateFormat = "dd/MM/yyyy") =>
@@ -91,3 +93,5 @@ export const utils = {
   calendar,
   tailwindCSS,
 };
+
+export const cn = (...classes: ClassValue[]) => twMerge(clsx(classes));

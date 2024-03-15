@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { createPortal } from "react-dom";
-import { DatePicker } from "./DatePicker";
+import { DatePicker } from "./datePicker/DatePicker";
 
 export const MovieDatePicker = () => {
   const [showModal, setShowModal] = useState(false);
