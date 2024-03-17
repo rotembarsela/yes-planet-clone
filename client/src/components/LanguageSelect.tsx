@@ -8,7 +8,7 @@ export const LanguageSelect = () => {
       <button
         id="dropdownDefaultButton"
         data-dropdown-toggle="dropdown"
-        className="text-black bg-white hover:bg-gray-100 focus:ring-2 focus:outline-none focus:ring-gray-400 font-medium rounded-md text-sm px-3 py-1.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        className="text-black bg-white hover:bg-gray-100 focus:ring-2 focus:outline-none focus:ring-gray-400 font-medium rounded-md text-sm px-3 py-1.5 text-center inline-flex items-center"
         type="button"
         onClick={() => setTriggerDd((prev) => !prev)}
       >

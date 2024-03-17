@@ -17,12 +17,15 @@ import { Route as WhatsonImport } from "./routes/whatson";
 import { Route as VipImport } from "./routes/vip";
 import { Route as ScreenxImport } from "./routes/screenx";
 import { Route as OffersImport } from "./routes/offers";
+import { Route as LoginImport } from "./routes/login";
 import { Route as ImaxImport } from "./routes/imax";
 import { Route as GiftsAndMovieCardsImport } from "./routes/giftsAndMovieCards";
 import { Route as BlogImport } from "./routes/blog";
 import { Route as LayoutImport } from "./routes/_layout";
-import { Route as R404Import } from "./routes/__404";
 import { Route as R4dxImport } from "./routes/4dx";
+import { Route as LayoutOrderLayoutImport } from "./routes/_layout/_orderLayout";
+import { Route as LayoutOrderLayoutOrderIndexImport } from "./routes/_layout/_orderLayout/order/index";
+import { Route as LayoutOrderLayoutOrderTicketsImport } from "./routes/_layout/_orderLayout/order/tickets";
 
 // Create Virtual Routes
 
@@ -56,6 +59,11 @@ const OffersRoute = OffersImport.update({
   getParentRoute: () => rootRoute,
 } as any);
 
+const LoginRoute = LoginImport.update({
+  path: "/login",
+  getParentRoute: () => rootRoute,
+} as any);
+
 const ImaxRoute = ImaxImport.update({
   path: "/imax",
   getParentRoute: () => rootRoute,
@@ -76,11 +84,6 @@ const LayoutRoute = LayoutImport.update({
   getParentRoute: () => rootRoute,
 } as any);
 
-const R404Route = R404Import.update({
-  id: "/__404",
-  getParentRoute: () => rootRoute,
-} as any);
-
 const R4dxRoute = R4dxImport.update({
   path: "/4dx",
   getParentRoute: () => rootRoute,
@@ -90,6 +93,23 @@ const IndexLazyRoute = IndexLazyImport.update({
   path: "/",
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import("./routes/index.lazy").then((d) => d.Route));
+
+const LayoutOrderLayoutRoute = LayoutOrderLayoutImport.update({
+  id: "/_orderLayout",
+  getParentRoute: () => LayoutRoute,
+} as any);
+
+const LayoutOrderLayoutOrderIndexRoute =
+  LayoutOrderLayoutOrderIndexImport.update({
+    path: "/order/",
+    getParentRoute: () => LayoutOrderLayoutRoute,
+  } as any);
+
+const LayoutOrderLayoutOrderTicketsRoute =
+  LayoutOrderLayoutOrderTicketsImport.update({
+    path: "/order/tickets",
+    getParentRoute: () => LayoutOrderLayoutRoute,
+  } as any);
 
 // Populate the FileRoutesByPath interface
 
@@ -101,10 +121,6 @@ declare module "@tanstack/react-router" {
     };
     "/4dx": {
       preLoaderRoute: typeof R4dxImport;
-      parentRoute: typeof rootRoute;
-    };
-    "/__404": {
-      preLoaderRoute: typeof R404Import;
       parentRoute: typeof rootRoute;
     };
     "/_layout": {
@@ -121,6 +137,10 @@ declare module "@tanstack/react-router" {
     };
     "/imax": {
       preLoaderRoute: typeof ImaxImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/login": {
+      preLoaderRoute: typeof LoginImport;
       parentRoute: typeof rootRoute;
     };
     "/offers": {
@@ -143,6 +163,18 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof AboutLazyImport;
       parentRoute: typeof rootRoute;
     };
+    "/_layout/_orderLayout": {
+      preLoaderRoute: typeof LayoutOrderLayoutImport;
+      parentRoute: typeof LayoutImport;
+    };
+    "/_layout/_orderLayout/order/tickets": {
+      preLoaderRoute: typeof LayoutOrderLayoutOrderTicketsImport;
+      parentRoute: typeof LayoutOrderLayoutImport;
+    };
+    "/_layout/_orderLayout/order/": {
+      preLoaderRoute: typeof LayoutOrderLayoutOrderIndexImport;
+      parentRoute: typeof LayoutOrderLayoutImport;
+    };
   }
 }
 
@@ -151,11 +183,16 @@ declare module "@tanstack/react-router" {
 export const routeTree = rootRoute.addChildren([
   IndexLazyRoute,
   R4dxRoute,
-  R404Route,
-  LayoutRoute,
+  LayoutRoute.addChildren([
+    LayoutOrderLayoutRoute.addChildren([
+      LayoutOrderLayoutOrderTicketsRoute,
+      LayoutOrderLayoutOrderIndexRoute,
+    ]),
+  ]),
   BlogRoute,
   GiftsAndMovieCardsRoute,
   ImaxRoute,
+  LoginRoute,
   OffersRoute,
   ScreenxRoute,
   VipRoute,

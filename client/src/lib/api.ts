@@ -18,11 +18,11 @@ export class ServerApiAdapter {
       headers["Authorization"] = `Bearer ${this.token}`;
     }
 
-    return (
-      Promise.race([this.delay(4000).then(() => ({ response: "timeout" }))]),
+    return Promise.race([
+      this.delay(4000).then(() => ({ response: "timeout" })),
       this.fetch(`${SERVER_URL}/films`, {
         headers,
-      }).then((res) => res.json())
-    );
+      }).then((res) => res.json()),
+    ]);
   }
 }
