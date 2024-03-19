@@ -12,202 +12,202 @@ import { createFileRoute } from '@tanstack/react-router'
 
 // Import Routes
 
-import { Route as rootRoute } from './routes/__root'
-import { Route as WhatsonImport } from './routes/whatson'
-import { Route as VipImport } from './routes/vip'
-import { Route as ScreenxImport } from './routes/screenx'
-import { Route as OffersImport } from './routes/offers'
-import { Route as LoginImport } from './routes/login'
-import { Route as ImaxImport } from './routes/imax'
-import { Route as GiftsAndMovieCardsImport } from './routes/giftsAndMovieCards'
-import { Route as BlogImport } from './routes/blog'
-import { Route as LayoutImport } from './routes/_layout'
-import { Route as R4dxImport } from './routes/4dx'
-import { Route as LayoutOrderLayoutImport } from './routes/_layout/_orderLayout'
-import { Route as LayoutOrderLayoutOrderIndexImport } from './routes/_layout/_orderLayout/order/index'
-import { Route as LayoutOrderLayoutOrderTicketsImport } from './routes/_layout/_orderLayout/order/tickets'
-import { Route as LayoutOrderLayoutOrderSeatsImport } from './routes/_layout/_orderLayout/order/seats'
-import { Route as LayoutOrderLayoutOrderPaymentImport } from './routes/_layout/_orderLayout/order/payment'
-import { Route as LayoutOrderLayoutOrderConfirmationImport } from './routes/_layout/_orderLayout/order/confirmation'
+import { Route as rootRoute } from "./routes/__root";
+import { Route as WhatsonImport } from "./routes/whatson";
+import { Route as VipImport } from "./routes/vip";
+import { Route as ScreenxImport } from "./routes/screenx";
+import { Route as OffersImport } from "./routes/offers";
+import { Route as LoginImport } from "./routes/login";
+import { Route as ImaxImport } from "./routes/imax";
+import { Route as GiftsAndMovieCardsImport } from "./routes/giftsAndMovieCards";
+import { Route as BlogImport } from "./routes/blog";
+import { Route as LayoutImport } from "./routes/_layout";
+import { Route as R4dxImport } from "./routes/4dx";
+import { Route as LayoutOrderLayoutImport } from "./routes/_layout/_orderLayout";
+import { Route as LayoutOrderLayoutOrderIndexImport } from "./routes/_layout/_orderLayout/order/index";
+import { Route as LayoutOrderLayoutOrderTicketsImport } from "./routes/_layout/_orderLayout/order/tickets";
+import { Route as LayoutOrderLayoutOrderSeatsImport } from "./routes/_layout/_orderLayout/order/seats";
+import { Route as LayoutOrderLayoutOrderPaymentImport } from "./routes/_layout/_orderLayout/order/payment";
+import { Route as LayoutOrderLayoutOrderConfirmationImport } from "./routes/_layout/_orderLayout/order/confirmation";
 
 // Create Virtual Routes
 
-const AboutLazyImport = createFileRoute('/about')()
-const IndexLazyImport = createFileRoute('/')()
+const AboutLazyImport = createFileRoute("/about")();
+const IndexLazyImport = createFileRoute("/")();
 
 // Create/Update Routes
 
 const AboutLazyRoute = AboutLazyImport.update({
-  path: '/about',
+  path: "/about",
   getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/about.lazy').then((d) => d.Route))
+} as any).lazy(() => import("./routes/about.lazy").then((d) => d.Route));
 
 const WhatsonRoute = WhatsonImport.update({
-  path: '/whatson',
+  path: "/whatson",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const VipRoute = VipImport.update({
-  path: '/vip',
+  path: "/vip",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const ScreenxRoute = ScreenxImport.update({
-  path: '/screenx',
+  path: "/screenx",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const OffersRoute = OffersImport.update({
-  path: '/offers',
+  path: "/offers",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const LoginRoute = LoginImport.update({
-  path: '/login',
+  path: "/login",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const ImaxRoute = ImaxImport.update({
-  path: '/imax',
+  path: "/imax",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const GiftsAndMovieCardsRoute = GiftsAndMovieCardsImport.update({
-  path: '/giftsAndMovieCards',
+  path: "/giftsAndMovieCards",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const BlogRoute = BlogImport.update({
-  path: '/blog',
+  path: "/blog",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const LayoutRoute = LayoutImport.update({
-  id: '/_layout',
+  id: "/_layout",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const R4dxRoute = R4dxImport.update({
-  path: '/4dx',
+  path: "/4dx",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const IndexLazyRoute = IndexLazyImport.update({
-  path: '/',
+  path: "/",
   getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
+} as any).lazy(() => import("./routes/index.lazy").then((d) => d.Route));
 
 const LayoutOrderLayoutRoute = LayoutOrderLayoutImport.update({
-  id: '/_orderLayout',
+  id: "/_orderLayout",
   getParentRoute: () => LayoutRoute,
-} as any)
+} as any);
 
 const LayoutOrderLayoutOrderIndexRoute =
   LayoutOrderLayoutOrderIndexImport.update({
-    path: '/order/',
+    path: "/order/",
     getParentRoute: () => LayoutOrderLayoutRoute,
-  } as any)
+  } as any);
 
 const LayoutOrderLayoutOrderTicketsRoute =
   LayoutOrderLayoutOrderTicketsImport.update({
-    path: '/order/tickets',
+    path: "/order/tickets",
     getParentRoute: () => LayoutOrderLayoutRoute,
-  } as any)
+  } as any);
 
 const LayoutOrderLayoutOrderSeatsRoute =
   LayoutOrderLayoutOrderSeatsImport.update({
-    path: '/order/seats',
+    path: "/order/seats",
     getParentRoute: () => LayoutOrderLayoutRoute,
-  } as any)
+  } as any);
 
 const LayoutOrderLayoutOrderPaymentRoute =
   LayoutOrderLayoutOrderPaymentImport.update({
-    path: '/order/payment',
+    path: "/order/payment",
     getParentRoute: () => LayoutOrderLayoutRoute,
-  } as any)
+  } as any);
 
 const LayoutOrderLayoutOrderConfirmationRoute =
   LayoutOrderLayoutOrderConfirmationImport.update({
-    path: '/order/confirmation',
+    path: "/order/confirmation",
     getParentRoute: () => LayoutOrderLayoutRoute,
-  } as any)
+  } as any);
 
 // Populate the FileRoutesByPath interface
 
-declare module '@tanstack/react-router' {
+declare module "@tanstack/react-router" {
   interface FileRoutesByPath {
-    '/': {
-      preLoaderRoute: typeof IndexLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/4dx': {
-      preLoaderRoute: typeof R4dxImport
-      parentRoute: typeof rootRoute
-    }
-    '/_layout': {
-      preLoaderRoute: typeof LayoutImport
-      parentRoute: typeof rootRoute
-    }
-    '/blog': {
-      preLoaderRoute: typeof BlogImport
-      parentRoute: typeof rootRoute
-    }
-    '/giftsAndMovieCards': {
-      preLoaderRoute: typeof GiftsAndMovieCardsImport
-      parentRoute: typeof rootRoute
-    }
-    '/imax': {
-      preLoaderRoute: typeof ImaxImport
-      parentRoute: typeof rootRoute
-    }
-    '/login': {
-      preLoaderRoute: typeof LoginImport
-      parentRoute: typeof rootRoute
-    }
-    '/offers': {
-      preLoaderRoute: typeof OffersImport
-      parentRoute: typeof rootRoute
-    }
-    '/screenx': {
-      preLoaderRoute: typeof ScreenxImport
-      parentRoute: typeof rootRoute
-    }
-    '/vip': {
-      preLoaderRoute: typeof VipImport
-      parentRoute: typeof rootRoute
-    }
-    '/whatson': {
-      preLoaderRoute: typeof WhatsonImport
-      parentRoute: typeof rootRoute
-    }
-    '/about': {
-      preLoaderRoute: typeof AboutLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/_layout/_orderLayout': {
-      preLoaderRoute: typeof LayoutOrderLayoutImport
-      parentRoute: typeof LayoutImport
-    }
-    '/_layout/_orderLayout/order/confirmation': {
-      preLoaderRoute: typeof LayoutOrderLayoutOrderConfirmationImport
-      parentRoute: typeof LayoutOrderLayoutImport
-    }
-    '/_layout/_orderLayout/order/payment': {
-      preLoaderRoute: typeof LayoutOrderLayoutOrderPaymentImport
-      parentRoute: typeof LayoutOrderLayoutImport
-    }
-    '/_layout/_orderLayout/order/seats': {
-      preLoaderRoute: typeof LayoutOrderLayoutOrderSeatsImport
-      parentRoute: typeof LayoutOrderLayoutImport
-    }
-    '/_layout/_orderLayout/order/tickets': {
-      preLoaderRoute: typeof LayoutOrderLayoutOrderTicketsImport
-      parentRoute: typeof LayoutOrderLayoutImport
-    }
-    '/_layout/_orderLayout/order/': {
-      preLoaderRoute: typeof LayoutOrderLayoutOrderIndexImport
-      parentRoute: typeof LayoutOrderLayoutImport
-    }
+    "/": {
+      preLoaderRoute: typeof IndexLazyImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/4dx": {
+      preLoaderRoute: typeof R4dxImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/_layout": {
+      preLoaderRoute: typeof LayoutImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/blog": {
+      preLoaderRoute: typeof BlogImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/giftsAndMovieCards": {
+      preLoaderRoute: typeof GiftsAndMovieCardsImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/imax": {
+      preLoaderRoute: typeof ImaxImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/login": {
+      preLoaderRoute: typeof LoginImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/offers": {
+      preLoaderRoute: typeof OffersImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/screenx": {
+      preLoaderRoute: typeof ScreenxImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/vip": {
+      preLoaderRoute: typeof VipImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/whatson": {
+      preLoaderRoute: typeof WhatsonImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/about": {
+      preLoaderRoute: typeof AboutLazyImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/_layout/_orderLayout": {
+      preLoaderRoute: typeof LayoutOrderLayoutImport;
+      parentRoute: typeof LayoutImport;
+    };
+    "/_layout/_orderLayout/order/confirmation": {
+      preLoaderRoute: typeof LayoutOrderLayoutOrderConfirmationImport;
+      parentRoute: typeof LayoutOrderLayoutImport;
+    };
+    "/_layout/_orderLayout/order/payment": {
+      preLoaderRoute: typeof LayoutOrderLayoutOrderPaymentImport;
+      parentRoute: typeof LayoutOrderLayoutImport;
+    };
+    "/_layout/_orderLayout/order/seats": {
+      preLoaderRoute: typeof LayoutOrderLayoutOrderSeatsImport;
+      parentRoute: typeof LayoutOrderLayoutImport;
+    };
+    "/_layout/_orderLayout/order/tickets": {
+      preLoaderRoute: typeof LayoutOrderLayoutOrderTicketsImport;
+      parentRoute: typeof LayoutOrderLayoutImport;
+    };
+    "/_layout/_orderLayout/order/": {
+      preLoaderRoute: typeof LayoutOrderLayoutOrderIndexImport;
+      parentRoute: typeof LayoutOrderLayoutImport;
+    };
   }
 }
 
@@ -234,4 +234,4 @@ export const routeTree = rootRoute.addChildren([
   VipRoute,
   WhatsonRoute,
   AboutLazyRoute,
-])
+]);
