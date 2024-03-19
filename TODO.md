@@ -12,6 +12,7 @@
 8. Promotions and Special Offers: Implement a section to showcase ongoing promotions, special offers, and upcoming events. This will attract users and encourage them to visit the cinema.
    Remember to regularly update and maintain the website to provide the best user experience and keep up with the latest industry trends.
 9. Fix useFocusTrap hook: focusing out of the parnet div element instead of getting back to the first tabIndex element.
+10. Refactor DatePicker Calendar component.
 
 ### API
 
